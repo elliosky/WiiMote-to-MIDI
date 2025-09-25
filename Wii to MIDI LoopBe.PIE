@@ -1,0 +1,40 @@
+﻿// Is the wii mote on?
+// Wiimote Battery Level from 0-192 (192 being a full battery)
+debug = “Wiimote:” + Wiimote1.Exists + ” Battery:” + Wiimote1.Battery
+midi.DeviceOut = 5 // 5 is Where to send over LoopBe (every system is different, check to be sure)
+midi.DefaultChannel = 5 // select MIDI channel
+// Example button map. Wiimote “Home” button will fire Midi Note “C3” on Midi Channel 10.
+
+midi.channel10.c3 = Wiimote1.Home
+
+// 1. if you press B on the wii remote AND
+// tilt it up or down (smooth pitch) it will take over midi ctrl-14, ctrl-3, ctrl-22, ctrl pitchwheel.
+// 2. if you press A on the wii remote AND
+// roll it left or right (roll) it will take over midi ctrl-15.
+
+//Wiimote Pitch - Control 14 - Expression
+if Wiimote1.B then
+midi.channel5.Control14 = maprange(wiimote1.smoothpitch, -90 degrees, 90 degrees, 0, 1)
+endif
+
+//Wiimote Pitch - Control 3 - Bow Pressure/Growl
+if Wiimote1.B then
+midi.channel5.Control3 = maprange(wiimote1.smoothpitch, -90 degrees, 90 degrees, 0, 1)
+endif
+
+//Wiimote Pitch - Control 22 - Bow Position/Flutter
+if Wiimote1.B then
+midi.channel5.Control22 = maprange(wiimote1.smoothpitch, -90 degrees, 90 degrees, 0, 1)
+endif
+
+// Wiimote PitchWheel - Pitch Bend Control
+if Wiimote1.B then
+midi.PitchWheel = maprange(wiimote1.smoothpitch, -360 degrees, 360 degrees, 0.3, 0.7)
+endif
+
+// Wiimote Roll - Control 15 - Vibrato
+if Wiimote1.A then
+midi.channel5.Control15 = maprange(wiimote1.smoothroll, -90 degrees, 90 degrees, 0, 1)
+endif
+
+
