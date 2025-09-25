@@ -21,3 +21,4 @@ WARNING:
 1. Make sure the device's MIDI output is not occupied by other devices.
 2. For each CC you write, GlovePIE creates a "noise dump" of the CC, so make sure it dumps it to a disabled CC: the dump is automatic, cannot be controlled, and usually occurs on unmapped CCs above 30.
 3. If you don't have a WiiMotion Plus, the "wiimote1." parameters are slightly different than what I wrote and you must rewrite them accordingly.
+4. The pitchbend range is limited, if you want a full scale just change the variables to +-90° and "0.3, 0.7" to "0, 1"
